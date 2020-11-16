@@ -1,5 +1,6 @@
-package com.github.xrapalexandra;
+package com.github.xrapalexandra.runner;
 
+import com.github.xrapalexandra.service.AbiturientList;
 import com.github.xrapalexandra.model.Abiturient;
 import com.github.xrapalexandra.model.FullName;
 

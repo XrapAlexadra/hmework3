@@ -1,4 +1,4 @@
-package com.github.xrapalexandra;
+package com.github.xrapalexandra.runner;
 
 import com.github.xrapalexandra.exception.AbiturientExceptoin;
 import com.github.xrapalexandra.model.Abiturient;

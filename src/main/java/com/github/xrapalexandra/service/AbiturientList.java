@@ -1,4 +1,4 @@
-package com.github.xrapalexandra;
+package com.github.xrapalexandra.service;
 
 import com.github.xrapalexandra.model.Abiturient;
 
