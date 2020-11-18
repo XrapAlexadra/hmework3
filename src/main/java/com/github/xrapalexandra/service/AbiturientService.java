@@ -1,24 +1,20 @@
 package com.github.xrapalexandra.service;
 
 import com.github.xrapalexandra.model.Abiturient;
+import com.github.xrapalexandra.model.AbiturientList;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-public class AbiturientList {
+public class AbiturientService {
 
     private static final int MIN_GOOD_MARK = 6;
 
-    private List<Abiturient> abiturients;
-
-    public AbiturientList(List<Abiturient> abiturients) {
-        this.abiturients = abiturients;
-    }
-
-
-    public List<Abiturient> findAllWithFailingGrades() {
+    public List<Abiturient> findAllWithFailingGrades(AbiturientList abiturients) {
         List<Abiturient> rightAbiturients = new ArrayList<>();
 
-        for (Abiturient abiturient : abiturients) {
+        for (Abiturient abiturient : abiturients.getAbiturients()) {
             if (hasAbiturientFailingGrade(abiturient)) {
                 rightAbiturients.add(abiturient);
             }
@@ -34,18 +30,14 @@ public class AbiturientList {
         return failingGrade.isPresent();
     }
 
-    public List<Abiturient> findAllWithMarksSumMoreThanGiven(int minMarkSum) {
+    public List<Abiturient> findAllWithMarksSumMoreThanGiven(AbiturientList abiturients, int minMarkSum) {
         List<Abiturient> rightAbiturients = new ArrayList<>();
 
-        for (Abiturient abiturient : abiturients) {
+        for (Abiturient abiturient : abiturients.getAbiturients()) {
             if (abiturient.getMarksSum() > minMarkSum) {
                 rightAbiturients.add(abiturient);
             }
         }
         return rightAbiturients;
-    }
-
-    public List<Abiturient> getAbiturients() {
-        return new ArrayList<>(abiturients);
     }
 }

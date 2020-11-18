@@ -1,67 +1,91 @@
 package com.github.xrapalexandra.model;
 
+import com.github.xrapalexandra.Indexing;
 import com.github.xrapalexandra.exception.AbiturientExceptoin;
+import com.google.common.base.Objects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Abiturient implements Comparable<Abiturient> {
+public class Abiturient{
 
-    private static Integer count = 0;
+    private static final Indexing indexing = new Indexing();
 
-    private Integer id;
-    private FullName fullName;
-    private ContactInfo contactInfo;
+    private int id;
+    private String surname;
+    private String name;
+    private String patronymic;
+    private Address address;
+    private String phoneNumber;
     private List<Integer> marks;
 
-    {
-        id = count++;
-    }
-
     public Abiturient() {
+        id = indexing.getId();
     }
 
-    public Abiturient(FullName fullName, List<Integer> marks) throws AbiturientExceptoin {
+    public Abiturient(String surname, String name, String patronymic, List<Integer> marks) throws AbiturientExceptoin {
         isValidMarks(marks);
-        this.fullName = fullName;
+        id = indexing.getId();
+        this.surname = surname;
+        this.name = name;
+        this.patronymic = patronymic;
         this.marks = marks;
     }
 
-    public Abiturient(FullName fullName, ContactInfo contactInfo, List<Integer> marks) throws AbiturientExceptoin {
+    public Abiturient(String surname, String name, String patronymic, Address address, String phoneNumber, List<Integer> marks) throws AbiturientExceptoin {
         isValidMarks(marks);
-        this.fullName = fullName;
-        this.contactInfo = contactInfo;
+        id = indexing.getId();
+        this.surname = surname;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
         this.marks = marks;
     }
 
-    private void isValidMarks(List<Integer> marks) throws AbiturientExceptoin {
-        for (Integer mark : marks) {
-            if (mark == null ||mark < 1 || mark > 10){
-                throw new AbiturientExceptoin("Marks is invalid!");
-            }
-        }
-    }
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public FullName getFullName() {
-        return fullName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFullName(FullName fullName) {
-        this.fullName = fullName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public ContactInfo getContactInfo() {
-        return contactInfo;
+    public String getName() {
+        return name;
     }
 
-    public void setContactInfo(ContactInfo contactInfo) {
-        this.contactInfo = contactInfo;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public List<Integer> getMarks() {
@@ -78,12 +102,23 @@ public class Abiturient implements Comparable<Abiturient> {
         return markSum.orElse(0);
     }
 
+    private void isValidMarks(List<Integer> marks) throws AbiturientExceptoin {
+        for (Integer mark: marks){
+            if(mark > 10 || mark < 1){
+                throw new AbiturientExceptoin(mark + " is invalid mark!");
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Abiturient{" +
                 "id=" + id +
-                ", " + fullName +
-                ", " + contactInfo +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", address=" + address +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", marks=" + marks +
                 '}';
     }
@@ -93,17 +128,14 @@ public class Abiturient implements Comparable<Abiturient> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Abiturient that = (Abiturient) o;
-        return id.equals(that.id) &&
-                fullName.equals(that.fullName);
+        return id == that.id &&
+                Objects.equal(surname, that.surname) &&
+                Objects.equal(name, that.name) &&
+                Objects.equal(patronymic, that.patronymic);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName);
-    }
-
-    @Override
-    public int compareTo(Abiturient abiturient) {
-        return abiturient.getMarksSum() - this.getMarksSum();
+        return Objects.hashCode(id, surname, name, patronymic);
     }
 }

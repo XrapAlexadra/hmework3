@@ -1,6 +1,6 @@
 package com.github.xrapalexandra.model;
 
-import java.util.Objects;
+import com.google.common.base.Objects;
 
 public class Address {
 
@@ -53,13 +53,15 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return city.equalsIgnoreCase(address.city) &&
-                street.equalsIgnoreCase(address.street) &&
-                building.equalsIgnoreCase(address.building);
+        return city.equals(address.city) &&
+                street.equals(address.street) &&
+                building.equals(address.building);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(city, street, building);
+        return Objects.hashCode(city, street, building);
     }
+
+
 }
