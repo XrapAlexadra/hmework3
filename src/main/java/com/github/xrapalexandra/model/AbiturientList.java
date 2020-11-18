@@ -1,9 +1,7 @@
 package com.github.xrapalexandra.model;
 
-import com.github.xrapalexandra.model.Abiturient;
-import com.google.common.base.Objects;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AbiturientList {
 

@@ -5,16 +5,12 @@ import com.github.xrapalexandra.model.Abiturient;
 import com.github.xrapalexandra.model.AbiturientList;
 import com.github.xrapalexandra.model.Address;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.testng.Assert.*;
 
 public class AbiturientServiceTest extends Assert {
 
