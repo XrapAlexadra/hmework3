@@ -1,4 +1,4 @@
-package com.github.xrapalexandra;
+package com.github.xrapalexandra.util;
 
 public class Indexing {
 
